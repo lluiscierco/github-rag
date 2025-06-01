@@ -1,7 +1,7 @@
 {
 	"name": "RAG LangChain Dev",
 	"build": {
-		"dockerfile": "Dockerfile",
+		"dockerfile": "DOCKERFILE",
 		"context": ".."
 	},
 	"customizations": {
