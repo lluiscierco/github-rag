@@ -1,0 +1,29 @@
+{
+	"name": "RAG LangChain Dev",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"context": ".."
+	},
+	"customizations": {
+		"settings": {
+			"terminal.integrated.defaultProfile.linux": "bash"
+		},
+		"vscode": {
+			"extensions": [
+				"ms-python.python",
+				"ms-toolsai.jupyter",
+				"eamodio.gitlens",
+				"ms-python.isort",
+				"VisualStudioExptTeam.vscodeintellicode",
+				"njpwerner.autodocstring"
+			]
+		}
+	},
+	"postCreateCommand": "pip install -r requirements.txt",
+	"forwardPorts": [
+		8000
+	],
+	"mounts": [
+		"source=${localWorkspaceFolder}/data,target=/app/data,type=bind"
+	]
+}
