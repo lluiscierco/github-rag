@@ -21,7 +21,7 @@ jobs:
         run: ls -la ..
 
       - name: Build Docker image
-        run: docker build -t gitrag-test -f .devcontainer/DOCKERFILE ..
+        run: docker build -t gitrag-test -f .devcontainer/DOCKERFILE .
 
       - name: Run tests inside Docker
         run: docker run --rm gitrag-test
