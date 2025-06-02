@@ -1,9 +1,6 @@
 
 from langchain_community.document_loaders import GithubFileLoader
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
+from app import config
 
 def load_github_docs(repo_name: str, branch: str="master", filter_file_extension: list[str]=".md") -> list:
     """
@@ -17,7 +14,7 @@ def load_github_docs(repo_name: str, branch: str="master", filter_file_extension
     Returns:
         list: of downloaded documents (langchain class)
     """
-    GITHUB_KEY = os.getenv("GITHUB_KEY")
+    GITHUB_KEY = config.GITHUB_KEY
     loader = GithubFileLoader(
         repo=repo_name,  #,  # the repo name
         branch=branch,  #"master",  # the branch name
