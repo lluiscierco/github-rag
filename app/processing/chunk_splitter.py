@@ -19,4 +19,9 @@ def document_splitter(documents: list, chunk_size:int = 1000, chunk_overlap:int 
     )
     splited_documents = text_splitter.split_documents(documents)
 
+    # Add custom IDs
+    for i, chunk in enumerate(splited_documents):
+        sha = chunk.metadata.get("sha", "unknown")
+        chunk.metadata["id"] = f"{sha}-chunk-{i}"
+
     return splited_documents
