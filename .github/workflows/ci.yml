@@ -24,4 +24,4 @@ jobs:
         run: docker build -t gitrag-test -f .devcontainer/DOCKERFILE .
 
       - name: Run tests inside Docker
-        run: docker run --rm gitrag-test
+        run: docker run --rm gitrag-test pytest tests/
