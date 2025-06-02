@@ -1,8 +1,8 @@
 # Create fast api server
 from app.loaders.github_loader import load_github_docs
 from app.processing.chunk_splitter import document_splitter
-from app.models.embeddings import document_embedder
 from app.db.pinecone_db import VectorStore
+from app.models.LLM import LLMChat
 
 def test_end_to_end():
     documents = load_github_docs(repo_name="langchain-ai/langchain")
@@ -13,6 +13,15 @@ def test_end_to_end():
     vector_store = VectorStore()
     vector_store.add_documents(splited_documents[:3])
     print("done!")
+def test_retrival():
+    vector_store = VectorStore()
+    retrived_docs = vector_store.retrive_context(query="Can i use this project in a devcontainer?")
+    #print(retrived_docs)
+    llm = LLMChat()
+    answer = llm.invoke("Can i use this project in a devcontainer?", retrived_docs[0][0].page_content)
+    print(answer)
+    
 
 if __name__ == "__main__":
-    test_end_to_end()
+    #test_end_to_end()
+    test_retrival()

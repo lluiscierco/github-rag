@@ -7,6 +7,7 @@ GITHUB_KEY = os.getenv("GITHUB_KEY")
 HUGGINGFACE_KEY = os.getenv("HUGGINGFACE_KEY")
 PC_KEY = os.getenv("PC_KEY")
 PC_INDEX = os.getenv("PC_INDEX")
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
 # from app import config
 # token = config.GITHUB_KEY
