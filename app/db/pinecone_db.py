@@ -14,7 +14,6 @@ class VectorStore:
             model="sentence-transformers/all-mpnet-base-v2",
         )
         self.vector_store = self._connect_vector_store()
-        self.top_k_vectors = 4
 
     def _connect_vector_store(self):
         pc = Pinecone(api_key=self.PC_KEY)
@@ -23,8 +22,11 @@ class VectorStore:
         return vector_store
 
     def add_documents(self, documents: list):
-        custom_ids = [doc.metadata['id'] for doc in documents]
+        custom_ids = [doc.metadata["id"] for doc in documents]
         return self.vector_store.add_documents(documents, ids=custom_ids)
-    
-    def retrive_context(self, query):
-        return self.vector_store.similarity_search_with_relevance_scores(query=query, k=self.top_k_vectors)
+
+    def as_retriever(self, top_k: int = 4, score_threshold: float = 0.5):
+        return self.vector_store.as_retriever(
+            search_type="similarity_score_threshold",
+            search_kwargs={"k": top_k, "score_threshold": score_threshold},
+        )

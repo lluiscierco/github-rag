@@ -7,7 +7,6 @@ GOOGLE_API_KEY = config.GOOGLE_API_KEY
 class LLMChat:
     def __init__(self):
         self.llm = init_chat_model("gemini-2.5-flash-preview-05-20", model_provider="google_genai")
-
         self.prompt_template = PromptTemplate(
             input_variables=["question", "context"],
             template=(
@@ -19,10 +18,6 @@ class LLMChat:
             )
         )
     
-    def build_prompt(self, question: str, context: str) -> str:
-        return self.prompt_template.format(question=question, context=context)
-    
-    def invoke(self, question: str, context: str) -> str:
-        prompt = self.build_prompt(question, context)
-        response = self.llm.invoke(prompt)
-        return response
+    def build_context(self, relevants_docs: list) -> str:
+        context = "\n\n".join(doc.page_content for doc in relevants_docs)
+        return context
