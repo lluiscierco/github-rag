@@ -2,7 +2,7 @@ from langchain_pinecone import PineconeVectorStore
 from pinecone import Pinecone
 from langchain_huggingface.embeddings import HuggingFaceEndpointEmbeddings
 from app import config
-
+import asyncio
 
 class VectorStore:
     def __init__(self):
@@ -21,9 +21,9 @@ class VectorStore:
         vector_store = PineconeVectorStore(embedding=self.embeddings, index=index)
         return vector_store
 
-    def add_documents(self, documents: list):
+    async def add_documents(self, documents: list):
         custom_ids = [doc.metadata["id"] for doc in documents]
-        return self.vector_store.add_documents(documents, ids=custom_ids)
+        return await self.vector_store.aadd_documents(documents, ids=custom_ids)
 
     def as_retriever(self, top_k: int = 4, score_threshold: float = 0.5):
         return self.vector_store.as_retriever(
