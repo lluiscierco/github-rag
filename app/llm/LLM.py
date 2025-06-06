@@ -4,7 +4,7 @@ from app import config
 
 GOOGLE_API_KEY = config.GOOGLE_API_KEY
 
-class LLMChat:
+class LLMClient:
     def __init__(self):
         self.llm = init_chat_model("gemini-2.5-flash-preview-05-20", model_provider="google_genai")
         self.prompt_template = PromptTemplate(

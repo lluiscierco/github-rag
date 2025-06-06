@@ -1,8 +1,21 @@
 # Split the docs in chunks of text
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-
+from app.models.schema import SplitterType
 class DocumentProcessor:
-    async def document_splitter(self,documents: list, chunk_size:int = 1000, chunk_overlap:int = 100) -> list:
+    def __init__(self):
+        pass
+    def _create_text_splitter(self, splitter:SplitterType, chunk_size: int, chunk_overlap: int):
+        if splitter == "recursive_character":
+            text_splitter = RecursiveCharacterTextSplitter(
+                chunk_size=chunk_size,
+                chunk_overlap=chunk_overlap,
+                length_function=len,
+                is_separator_regex=False,
+            )
+            return text_splitter
+        else:
+            raise ValueError(f"Unsupported splitter type: {splitter}")
+    async def document_splitter(self,documents: list, splitter: SplitterType="recursive_character", chunk_size:int = 1000, chunk_overlap:int = 100) -> list:
         """
         Split a list of documents into smaller text sizes. Docs mantain the original metadata
 
@@ -14,11 +27,10 @@ class DocumentProcessor:
         Returns:
             _type_: List of documents
         """
-        text_splitter = RecursiveCharacterTextSplitter(
+        text_splitter = self._create_text_splitter(
             chunk_size=chunk_size,
             chunk_overlap=chunk_overlap,
-            length_function=len,
-            is_separator_regex=False,
+            splitter=splitter
         )
         
         splited_documents = await text_splitter.atransform_documents(documents)

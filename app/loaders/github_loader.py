@@ -11,8 +11,8 @@ class GithubRepoLoader:
     async def load_github_docs(
         self,
         repo_name: str,
-        branch: str = "master",
-        filter_file_extension: list[str] = None,  # set default inside
+        branch: str,
+        filter_file_extension: list[str] | None,  # set default inside
     ) -> list:
         """
         Download a github repo by using the specified url and file extensions
@@ -25,17 +25,30 @@ class GithubRepoLoader:
         Returns:
             list: of downloaded documents (langchain class)
         """
-        if filter_file_extension is None:
-            filter_file_extension = [".md"]
-
+        binary_extensions = [
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".gif",
+            ".pdf",
+            ".exe",
+            ".dll",
+            ".so",
+            ".zip",
+            ".tar",
+            ".gz",
+        ]
         loader = GithubFileLoader(
-            repo=repo_name,  # the repo name
-            branch=branch,  # the branch name
+            repo=repo_name,
+            branch=branch,
             access_token=self.GITHUB_KEY,
             github_api_url=self.github_api_url,
-            file_filter=lambda path: any(
-                path.endswith(ext) for ext in filter_file_extension
-            ),  # load all markdowns files.
+            file_filter=lambda path: (
+                True
+                if filter_file_extension is None
+                else any(path.endswith(ext) for ext in filter_file_extension)
+            )
+            and not any(path.endswith(ext) for ext in binary_extensions),
         )
         documents = await loader.aload()
 
