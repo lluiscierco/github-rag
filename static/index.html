@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG Frontend</title>
+    <!-- Your CSS remains the same -->
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0; padding: 2rem; background-color: #f4f7f6; color: #333;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .container {
+            background: white; padding: 2rem; border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 100%;
+            max-width: 600px; margin-bottom: 2rem;
+        }
+        h1, h2 { color: #1a252f; text-align: center; }
+        form { display: flex; flex-direction: column; gap: 1rem; }
+        label { font-weight: bold; }
+        input, select, textarea, button {
+            padding: 0.75rem; border-radius: 4px; border: 1px solid #ccc; font-size: 1rem;
+        }
+        textarea { resize: vertical; min-height: 80px; }
+        button {
+            background-color: #007bff; color: white; border: none;
+            cursor: pointer; font-weight: bold; transition: background-color 0.2s;
+        }
+        button:hover { background-color: #0056b3; }
+        button:disabled { background-color: #aaa; cursor: not-allowed; }
+        .result {
+            margin-top: 1.5rem; padding: 1rem; border-radius: 4px; background-color: #e9ecef;
+            white-space: pre-wrap; word-wrap: break-word; font-family: "Courier New", Courier, monospace;
+        }
+        .result.error { background-color: #f8d7da; color: #721c24; }
+        .result.success { background-color: #d4edda; color: #155724; }
+    </style>
+</head>
+<body>
+    <h1>RAG System Control Panel</h1>
+
+    <!-- Ingestion Section -->
+    <div class="container">
+        <h2>Ingest GitHub Repository</h2>
+        <form id="ingestForm">
+            <label for="repoName">Repository Name:</label>
+            <input type="text" id="repoName" name="repo_name" placeholder="e.g., pydantic/pydantic" required>
+
+            <label for="branch">Branch:</label>
+            <input type="text" id="branch" name="branch" value="main" required>
+            
+            <label for="filterExt">Filter File Extensions (comma-separated):</label>
+            <input type="text" id="filterExt" name="filter_file_extension" value=".py,.md">
+
+            <label for="chunkSize">Chunk Size:</label>
+            <input type="number" id="chunkSize" name="chunk_size" value="1000" required>
+
+            <label for="chunkOverlap">Chunk Overlap:</label>
+            <input type="number" id="chunkOverlap" name="chunk_overlap" value="100" required>
+
+            <label for="splitter">Splitter:</label>
+            <!-- ======================= THE FIX IS HERE ======================= -->
+            <!-- The 'value' attribute is what gets sent to the backend.        -->
+            <!-- The text between the tags is what the user sees in the dropdown. -->
+            <select id="splitter" name="splitter">
+                <option value="recursive_character">Recursive Character</option>
+                <!-- If you add more splitter types to your Literal in the future, add them here. -->
+                <!-- Example: <option value="code">Code Splitter</option> -->
+            </select>
+            <!-- =============================================================== -->
+            
+            <button type="submit" id="ingestButton">Ingest Repository</button>
+        </form>
+        <div id="ingestResult" class="result" style="display:none;"></div>
+    </div>
+
+    <!-- RAG Query Section (No changes needed) -->
+    <div class="container">
+        <h2>Query the RAG</h2>
+        <form id="ragForm">
+            <label for="question">Your Question:</label>
+            <textarea id="question" name="question" placeholder="Ask a question about the ingested repository..." required></textarea>
+            <button type="submit" id="ragButton">Ask Question</button>
+        </form>
+        <div id="ragResult" class="result" style="display:none;"></div>
+    </div>
+
+<script>
+    // The JavaScript code does not need any changes. It correctly reads
+    // the 'value' from the selected option.
+    document.addEventListener('DOMContentLoaded', () => {
+        const API_BASE_URL = 'http://127.0.0.1:8000';
+        const ingestForm = document.getElementById('ingestForm');
+        const ingestButton = document.getElementById('ingestButton');
+        const ingestResult = document.getElementById('ingestResult');
+        const ragForm = document.getElementById('ragForm');
+        const ragButton = document.getElementById('ragButton');
+        const ragResult = document.getElementById('ragResult');
+
+        ingestForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            ingestButton.disabled = true;
+            ingestResult.style.display = 'block';
+            ingestResult.className = 'result';
+            ingestResult.textContent = 'Ingesting... This may take a while.';
+            
+            const formData = new FormData(ingestForm);
+            const extensionsString = formData.get('filter_file_extension');
+
+            const payload = {
+                repo_name: formData.get('repo_name'),
+                branch: formData.get('branch'),
+                filter_file_extension: extensionsString ? extensionsString.split(',').map(ext => ext.trim()).filter(Boolean) : [],
+                chunk_size: parseInt(formData.get('chunk_size'), 10),
+                chunk_overlap: parseInt(formData.get('chunk_overlap'), 10),
+                splitter: formData.get('splitter')
+            };
+
+            console.log("Sending payload to /ingest_github_repo/:", JSON.stringify(payload, null, 2));
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/ingest_github_repo/`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await response.json();
+                if (!response.ok) {
+                    const errorDetail = data.detail ? JSON.stringify(data.detail) : `HTTP error! Status: ${response.status}`;
+                    throw new Error(errorDetail);
+                }
+                ingestResult.className = 'result success';
+                ingestResult.textContent = `Success: ${data.message}`;
+            } catch (error) {
+                ingestResult.className = 'result error';
+                ingestResult.textContent = `Error: ${error.message}`;
+            } finally {
+                ingestButton.disabled = false;
+            }
+        });
+
+        // RAG form handler (no changes needed here)
+        ragForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            ragButton.disabled = true;
+            ragResult.style.display = 'block';
+            ragResult.className = 'result';
+            ragResult.textContent = 'Thinking...';
+            const formData = new FormData(ragForm);
+            const payload = { question: formData.get('question') };
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/query-rag/`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await response.json();
+                if (!response.ok) {
+                     const errorDetail = data.detail ? JSON.stringify(data.detail) : `HTTP error! Status: ${response.status}`;
+                    throw new Error(errorDetail);
+                }
+                ragResult.className = 'result success';
+                ragResult.textContent = data.Answer;
+            } catch (error) {
+                ragResult.className = 'result error';
+                ragResult.textContent = `Error: ${error.message}`;
+            } finally {
+                ragButton.disabled = false;
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+2025-07-02 19:12:34,426 | app.main | INFO | 🚀 FastAPI application has started.
+2025-07-02 19:12:47,842 | app.chains.ingestion_pipeline | INFO | Get files from repo: scikit-learn/scikit-learn, branch: main.
+2025-07-02 19:12:48,238 | app.chains.ingestion_pipeline | INFO | Downloaded 0 documents from github.
+2025-07-02 19:12:48,240 | app.chains.ingestion_pipeline | INFO | Splited into 0 document chunks.
+2025-07-02 19:12:48,241 | app.chains.ingestion_pipeline | INFO | Uploading to vector store...
+2025-07-02 19:12:48,245 | app.chains.ingestion_pipeline | INFO | done!
+2025-07-02 19:13:36,847 | app.chains.ingestion_pipeline | INFO | Get files from repo: scikit-learn/scikit-learn, branch: main.
+2025-07-02 19:17:54,038 | app.chains.ingestion_pipeline | INFO | Downloaded 933 documents from github.
+2025-07-02 19:17:54,696 | app.chains.ingestion_pipeline | INFO | Splited into 19071 document chunks.
+2025-07-02 19:17:54,696 | app.chains.ingestion_pipeline | INFO | Uploading to vector store...
+2025-07-02 19:18:12,481 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fb155310290>
+2025-07-02 19:18:39,504 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fb1331dc890>
+2025-07-02 19:19:04,839 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fb164176f10>
+2025-07-02 19:19:28,849 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fb167201890>
+2025-07-02 19:19:58,001 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fb167b73290>
+2025-07-02 19:20:40,462 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fb155277010>
+2025-07-02 19:21:13,435 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fb167349810>
+2025-07-02 19:21:42,833 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fb132744a50>
+2025-07-02 19:22:07,940 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fb167349850>
+2025-07-02 19:22:33,275 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fb167ae4050>
+2025-07-02 19:22:57,726 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fb164180150>
+2025-07-02 19:23:24,491 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fb132744210>
+2025-07-02 19:23:48,472 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fb167b73290>
+2025-07-02 19:24:16,597 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fb164123650>
+2025-07-02 19:24:42,507 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fb167e8b0d0>
+2025-07-02 19:25:07,866 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fb132747390>
+2025-07-02 19:25:30,763 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fb13257e3d0>
+2025-07-02 19:25:53,123 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fb1327e7650>
+2025-07-02 19:26:16,125 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fb1672580d0>
+2025-07-02 19:26:23,925 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7fb1671f77d0>
+2025-07-02 19:26:25,301 | app.chains.ingestion_pipeline | INFO | done!
+2025-07-02 19:26:29,390 | app.main | INFO | 🚀 FastAPI application has started.
+2025-07-02 19:31:23,534 | app.main | INFO | 🚀 FastAPI application has started.
+2025-07-02 19:48:27,323 | app.chains.ingestion_pipeline | INFO | Get files from repo: scikit-learn/scikit-learn, branch: main.
+2025-07-02 19:52:02,627 | app.chains.ingestion_pipeline | INFO | Downloaded 933 documents from github.
+2025-07-02 19:52:03,874 | app.chains.ingestion_pipeline | INFO | Splited into 19071 document chunks.
+2025-07-02 19:52:03,875 | app.chains.ingestion_pipeline | INFO | Uploading to vector store...
+2025-07-02 19:52:26,909 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f64a57a1dd0>
+2025-07-02 19:52:52,492 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f647ef13a90>
+2025-07-02 19:53:18,226 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f647ef13f10>
+2025-07-02 19:53:49,097 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f64a57ee550>
+2025-07-02 19:54:17,085 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f64a7658450>
+2025-07-02 19:54:44,449 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f64a5917910>
+2025-07-02 19:55:12,283 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f64a60fcfd0>
+2025-07-02 19:55:40,869 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f64a5916a10>
+2025-07-02 19:56:16,340 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f64a60fcf10>
+2025-07-02 19:56:51,630 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f64a57d1bd0>
+2025-07-02 19:57:26,267 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f64a60fcfd0>
+2025-07-02 19:58:30,356 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f64a58b1c10>
+2025-07-02 19:59:11,763 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f64a5917910>
+2025-07-02 19:59:53,144 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f647cc27490>
+2025-07-02 20:00:51,905 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f64a60fc9d0>
+2025-07-02 20:01:19,503 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f647cd52110>
+2025-07-02 20:01:44,847 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f647cd52d10>
+2025-07-02 20:02:12,939 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f647cd52110>
+2025-07-02 20:02:39,343 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f647cdab4d0>
+2025-07-02 20:02:49,654 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f64a57a3e10>
+2025-07-02 20:02:50,994 | app.chains.ingestion_pipeline | INFO | done!
+2025-07-02 20:14:26,600 | app.main | INFO | 🚀 FastAPI application has started.
+2025-07-02 20:14:35,173 | app.chains.ingestion_pipeline | INFO | Get files from repo: scikit-learn/scikit-learn, branch: main.
+2025-07-02 20:14:37,508 | app.chains.ingestion_pipeline | INFO | Downloaded 9 documents from github.
+2025-07-02 20:14:37,511 | app.chains.ingestion_pipeline | INFO | Splited into 20 document chunks.
+2025-07-02 20:14:37,512 | app.chains.ingestion_pipeline | INFO | Uploading to vector store...
+2025-07-02 20:14:38,664 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f2d1af20290>
+2025-07-02 20:14:39,679 | app.chains.ingestion_pipeline | INFO | done!
+2025-07-02 20:14:48,243 | app.chains.ingestion_pipeline | INFO | Get files from repo: scikit-learn/scikit-learn, branch: main.
+2025-07-02 20:14:50,668 | app.chains.ingestion_pipeline | INFO | Downloaded 9 documents from github.
+2025-07-02 20:14:50,671 | app.chains.ingestion_pipeline | INFO | Splited into 20 document chunks.
+2025-07-02 20:14:50,672 | app.chains.ingestion_pipeline | INFO | Uploading to vector store...
+2025-07-02 20:14:51,257 | asyncio | ERROR | Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f2d1af50550>
+2025-07-02 20:14:52,314 | app.chains.ingestion_pipeline | INFO | done!
