@@ -16,10 +16,11 @@ app = FastAPI()
 # This allows your frontend (running on a different port or domain)
 # to communicate with your backend.
 origins = [
-    "http://localhost",
-    "http://localhost:8080",
-    "http://127.0.0.1:5500", # Common port for VS Code Live Server
-    "null", # Allows opening the HTML file directly (origin: "null")
+    "https://git-rag-app.onrender.com"
+    #"http://localhost",
+    #"http://localhost:8080",
+    #"http://127.0.0.1:5500", # Common port for VS Code Live Server
+    #"null", # Allows opening the HTML file directly (origin: "null")
 ]
 
 app.add_middleware(
